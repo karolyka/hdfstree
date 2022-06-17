@@ -52,16 +52,16 @@ class HDFSFileSystemInspector(verbose: Boolean) : FileSystemInspector(verbose) {
             val confPath = listOf(
                 HADOOP_CONF_DIR to System.getenv(HADOOP_CONF_DIR),
                 HADOOP_HOME to System.getenv(HADOOP_HOME) + HADOOP_CONF,
-                "/etc/hadoop${HADOOP_CONF}"
+                "/etc" to "/etc/hadoop${HADOOP_CONF}"
             ).firstOrNull {
                 verbose("Checking $it")
-                File("$it/$CORE_SITE").exists()
+                File("${it.second}/$CORE_SITE").exists()
             } ?: throw Exception("Not found Hadoop configuration.")
-            verbose("Hadoop config path: $confPath")
+            verbose("Hadoop config path: ${confPath.second}")
             return Configuration(false).apply {
                 listOf(HDFS_SITE, MAPRED_SITE, CORE_SITE).forEach {
                     verbose("Adding config file: $it")
-                    addResource(Path("$confPath/$it"))
+                    addResource(Path("${confPath.second}/$it"))
                 }
                 set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem")
             }
