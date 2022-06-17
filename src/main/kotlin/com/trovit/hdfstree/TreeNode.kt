@@ -13,12 +13,14 @@
  */
 package com.trovit.hdfstree
 
+private const val NOT_VALID = -1L
+
 class TreeNode(val name: String, val isDirectory: Boolean, length: Long) {
     val children = mutableListOf<TreeNode>()
     val folders get() = children.filter { it.isDirectory }
-    var size = if (isDirectory) 0 else length
+    var size = if (isDirectory) NOT_VALID else length
         get() {
-            if (field == 0L) {
+            if (field == NOT_VALID) {
                 field = children.sumOf { it.size }
             }
             return field

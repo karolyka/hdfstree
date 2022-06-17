@@ -25,10 +25,10 @@ private const val MAPRED_SITE = "mapred-site.xml"
 private const val CORE_SITE = "core-site.xml"
 
 private const val HADOOP_CONF_DIR = "HADOOP_CONF_DIR"
-
 private const val HADOOP_HOME = "HADOOP_HOME"
+private const val HADOOP_CONF = "/conf"
 
-class HDFSFileSystemInspector(verbose : Boolean) : FileSystemInspector(verbose) {
+class HDFSFileSystemInspector(verbose: Boolean) : FileSystemInspector(verbose) {
     private val fileSystem: FileSystem = FileSystem.get(hadoopConfiguration)
 
     override fun getEntry(currentPath: String) =
@@ -37,8 +37,7 @@ class HDFSFileSystemInspector(verbose : Boolean) : FileSystemInspector(verbose) 
     override fun list(currentPath: String): List<TreeNode> {
         try {
             verbose(currentPath)
-            return fileSystem.listStatus(Path(currentPath))
-                .map { TreeNode(it.path.name, it.isDirectory, it.len) }
+            return fileSystem.listStatus(Path(currentPath)).map { TreeNode(it.path.name, it.isDirectory, it.len) }
                 .sortedBy { it.name }
         } catch (e: IOException) {
             println(e.message)
@@ -52,8 +51,9 @@ class HDFSFileSystemInspector(verbose : Boolean) : FileSystemInspector(verbose) 
         get() {
             val confPath = listOf(
                 HADOOP_CONF_DIR to System.getenv(HADOOP_CONF_DIR),
-                HADOOP_HOME to System.getenv(HADOOP_HOME) + "/conf",
-                "/etc/hadoop/conf").firstOrNull {
+                HADOOP_HOME to System.getenv(HADOOP_HOME) + HADOOP_CONF,
+                "/etc/hadoop${HADOOP_CONF}"
+            ).firstOrNull {
                 verbose("Checking $it")
                 File("$it/$CORE_SITE").exists()
             } ?: throw Exception("Not found Hadoop configuration.")

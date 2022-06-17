@@ -15,7 +15,7 @@ package com.trovit.hdfstree.fsinspectors
 
 import com.trovit.hdfstree.TreeNode
 
-abstract class FileSystemInspector(var printVerbose : Boolean = false) {
+abstract class FileSystemInspector(private var printVerbose: Boolean = false) {
 
     fun verbose(message: String) {
         if (printVerbose) println(message)
