@@ -1,3 +1,3 @@
 
-rootProject.name = "hdfs-tree"
+rootProject.name = "hdfstree"
 

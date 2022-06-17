@@ -30,3 +30,9 @@ tasks.withType<KotlinCompile> {
 application {
     mainClass.set("com.trovit.hdfstree.HdfsTreeKt")
 }
+
+tasks.shadowJar {
+    archiveBaseName.set(project.name)
+    archiveClassifier.set("")
+    archiveVersion.set(project.version.toString())
+}
