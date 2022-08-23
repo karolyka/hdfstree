@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     implementation("commons-cli:commons-cli:1.5.0")
-    implementation("org.apache.hadoop:hadoop-client:3.3.3")
+    implementation("org.apache.hadoop:hadoop-client:3.3.4")
     testImplementation(kotlin("test"))
 }
 
