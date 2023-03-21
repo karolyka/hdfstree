@@ -32,6 +32,7 @@ application {
 }
 
 tasks.shadowJar {
+    mustRunAfter(tasks.distZip, tasks.distTar)
     archiveBaseName.set(project.name)
     archiveClassifier.set("")
     archiveVersion.set(project.version.toString())
