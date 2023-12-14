@@ -1,7 +1,7 @@
 repo_name: karolyka/hdfstree
-report_id: a534823eaab758ee36ccd306defa6223
+report_id: dda44917e0df54b7b059b2e231503eb9
 repo_type: Public
-timestamp: '2023-11-22T09:25:42+00:00'
+timestamp: '2023-12-14T13:16:52+00:00'
 requested_by: karolyka
 provider: github
 branch: master
@@ -45,6 +45,6 @@ tools:
   category: Build, Test, Deploy
   sub_category: Java Build Tools
   image_url: https://img.stackshare.io/service/975/gradlephant-social-black-bg.png
-  detection_source: gradlew.bat
+  detection_source: gradlew
   last_updated_by: Karoly Machalik
   last_updated_on: 2022-06-17 07:40:48.000000000 Z
