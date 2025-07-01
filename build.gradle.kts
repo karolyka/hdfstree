@@ -23,8 +23,8 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+kotlin {
+    jvmToolchain(21)
 }
 
 application {
